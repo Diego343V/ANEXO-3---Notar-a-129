@@ -31,6 +31,38 @@
             margin: 0 auto;
         }
 
+        /* CONTENEDOR DE CADA PÁGINA (Para centrar la marca de agua por hoja) */
+        .page-container {
+            position: relative;
+            width: 100%;
+            min-height: 940px; /* Altura aproximada de una hoja tamaño carta */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* MARCA DE AGUA INDIVIDUAL */
+        .marca-agua {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px; 
+            height: 600px;
+            background-image: url('https://i.postimg.cc/gJxG7j25/Logo-Extended-png.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.08; 
+            z-index: 0; 
+            pointer-events: none; 
+        }
+
+        /* Asegurar que el contenido esté por encima de la marca de agua */
+        .row, .section-title, .legend-box, .main-header, .signature-section, .doc-table {
+            position: relative;
+            z-index: 1;
+        }
+
         .header-top {
             font-size: 9px;
             text-align: center;
@@ -125,167 +157,175 @@
     </div>
 
     <div id="form-content">
-        <div class="main-header">
-            <div class="logo-container">
-                <img src="https://i.postimg.cc/3NY9rgmB/Logo-Enhanced.png" class="logo-img" alt="Logo" crossorigin="anonymous">
-            </div>
-            <div class="notary-info">
-                <h1>NOTARIO PÚBLICO NO. 129</h1>
-                <h2>MAESTRO EN DERECHO JOSÉ GODÍNEZ ARGÜELLO</h2>
-                <strong style="font-size: 13px; display: block; margin-top: 4px;">ANEXO 3 - IDENTIFICACIÓN DE CLIENTES</strong>
-            </div>
-            <div style="width: 85px;"></div>
-        </div>
-
-        <div class="section-title">IDENTIFICACIÓN Y CONOCIMIENTO DEL CLIENTE O USUARIO</div>
         
-        <div class="row">
-            <div class="field" style="flex: 2;"><label>NOMBRE(S)</label><input type="text" id="input-nombre"></div>
-            <div class="field"><label>APELLIDO PATERNO</label><input type="text" id="input-paterno"></div>
-            <div class="field"><label>APELLIDO MATERNO</label><input type="text" id="input-materno"></div>
-        </div>
+        <div class="page-container">
+            <div class="marca-agua"></div>
 
-        <div class="row">
-            <div class="field"><label>FECHA DE NACIMIENTO</label><input type="date"></div>
-            <div class="field"><label>PAÍS DE NACIMIENTO</label><input type="text"></div>
-        </div>
-
-        <div class="row">
-            <div class="field">
-                <label>ESTADO, PROVINCIA, CIUDAD MUNICIPIO (ESTADO)</label>
-                <select id="edo-select" onchange="actualizarMunicipios()"><option value="">Seleccione...</option></select>
+            <div class="main-header">
+                <div class="logo-container">
+                    <img src="https://i.postimg.cc/3NY9rgmB/Logo-Enhanced.png" class="logo-img" alt="Logo" crossorigin="anonymous">
+                </div>
+                <div class="notary-info">
+                    <h1>NOTARIO PÚBLICO NO. 129</h1>
+                    <h2>MAESTRO EN DERECHO JOSÉ GODÍNEZ ARGÜELLO</h2>
+                    <strong style="font-size: 13px; display: block; margin-top: 4px;">ANEXO 3 - IDENTIFICACIÓN DE CLIENTES</strong>
+                </div>
+                <div style="width: 85px;"></div>
             </div>
-            <div class="field">
-                <label>MUNICIPIO / CIUDAD</label>
-                <select id="mun-select"><option value="">-- Estado primero --</option></select>
+
+            <div class="section-title">IDENTIFICACIÓN Y CONOCIMIENTO DEL CLIENTE O USUARIO</div>
+            
+            <div class="row">
+                <div class="field" style="flex: 2;"><label>NOMBRE(S)</label><input type="text" id="input-nombre"></div>
+                <div class="field"><label>APELLIDO PATERNO</label><input type="text" id="input-paterno"></div>
+                <div class="field"><label>APELLIDO MATERNO</label><input type="text" id="input-materno"></div>
             </div>
-            <div class="field"><label>NACIONALIDAD</label><input type="text"></div>
-        </div>
 
-        <div class="row">
-            <div class="field"><label>ACTIVIDAD, OCUPACIÓN, PROFESIÓN, ACTIVIDAD O GIRO DE NEGOCIO A QUE SE DEDIQUE</label><input type="text"></div>
-        </div>
-
-        <div class="row">
-            <div class="field"><label>INGRESOS MENSUALES PROMEDIO</label><input type="text" placeholder="$"></div>
-            <div class="field"><label>RÉGIMEN FISCAL</label><input type="text"></div>
-        </div>
-
-        <div class="row">
-            <div class="field"><label>ESTADO CIVIL (EN CASO DE MATRIMONIO ESPECIFICAR RÉGIMEN CONYUGAL)</label><input type="text"></div>
-        </div>
-
-        <div class="row">
-            <div class="field"><label>¿DESEMPEÑA A CARGO PÚBLICO O LO HA DESEMPEÑADO EN EL ÚLTIMO AÑO? (ESPECIFICAR)</label><input type="text"></div>
-        </div>
-
-        <div class="row">
-            <div class="field"><label>¿ALGÚN PARIENTE HASTA EL SEGUNDO GRADO, CÓNYUGE, CONCUBINA (O) OCUPA O HA OCUPADO UN CARGO PÚBLICO EN EL ÚLTIMO AÑO? (ESPECIFICAR)</label><input type="text"></div>
-        </div>
-
-        <div class="section-title">DATOS DE CONTACTO DEL CLIENTE O USUARIO</div>
-
-        <div class="row">
-            <div class="field" style="flex: 2.5;"><label>DOMICILIO: CALLE, AVENIDA O VÍA</label><input type="text"></div>
-            <div class="field"><label>NÚMERO EXTERIOR</label><input type="text"></div>
-            <div class="field"><label>NÚMERO INTERIOR</label><input type="text"></div>
-        </div>
-
-        <div class="row">
-            <div class="field"><label>COLONIA O URBANIZACIÓN</label><input type="text"></div>
-            <div class="field"><label>MUNICIPIO O DEMARCACIÓN POLÍTICA SIMILAR</label><input type="text"></div>
-        </div>
-
-        <div class="row">
-            <div class="field"><label>CIUDAD O POBLACIÓN</label><input type="text"></div>
-            <div class="field"><label>ENTIDAD FEDERATIVA, ESTADO, PROVINCIA, DEPARTAMENTO O DEMARCACIÓN POLÍTICA SIMILAR</label><input type="text"></div>
-        </div>
-
-        <div class="row">
-            <div class="field"><label>CÓDIGO POSTAL</label><input type="text"></div>
-            <div class="field"><label>PAÍS</label><input type="text" value="MÉXICO"></div>
-        </div>
-
-        <div class="row">
-            <div class="field"><label>NÚMERO DE TELÉFONO FIJO</label><input type="text"></div>
-            <div class="field"><label>NÚMERO DE TELÉFONO CELULAR</label><input type="text"></div>
-            <div class="field" style="flex: 1.5;"><label>CORREO ELECTRÓNICO</label><input type="email"></div>
-        </div>
-
-        <div class="section-title">DATOS ADICIONALES DEL CLIENTE O USUARIO</div>
-
-        <div class="row">
-            <div class="field"><label>CURP</label><input type="text"></div>
-            <div class="field"><label>RFC</label><input type="text"></div>
-        </div>
-
-        <div class="row">
-            <div class="field" style="flex: 1.5;"><label>DATOS DE IDENTIFICACIÓN: NOMBRE DE LA IDENTIFICACIÓN</label><input type="text"></div>
-            <div class="field"><label>AUTORIDAD QUE LA EMITE</label><input type="text"></div>
-            <div class="field"><label>NÚMERO DE IDENTIFICACIÓN</label><input type="text"></div>
-        </div>
-
-        <div class="legend-box" style="page-break-before: always; margin-top: 15px;">
-            RESPECTO AL APARTADO DE BENEFICIARIO CONTROLADOR, Y EN CUMPLIMIENTO DE LO DISPUESTO EN EL ARTÍCULO 3, FRACCIÓN III DE LA LEY FEDERAL PARA LA PREVENCIÓN E IDENTIFICACIÓN DE OPERACIONES CON RECURSOS DE PROCEDENCIA ILÍCITA (LFPIORPI), DICHA INFORMACIÓN SERÁ INCORPORADA EN UN DOCUMENTO ANEXO, EL CUAL FORMARÁ PARTE INTEGRAL DEL EXPEDIENTE CORRESPONDIENTE.
-        </div>
-
-        <div class="section-title">DOCUMENTOS QUE SE ESTÁN ENTREGANDO PARA EL EXPEDIENTE ÚNICO DE IDENTIFICACIÓN</div>
-        
-        <div class="row"><div class="field"><label>I. IDENTIFICACIÓN OFICIAL</label><input type="text"></div></div>
-        <div class="row"><div class="field"><label>II. COMPROBANTE DE DOMICILIO</label><input type="text"></div></div>
-        <div class="row"><div class="field"><label>III. CONSTANCIA POR LA QUE SE ACREDITE QUE SE SOLICITÓ INFORMACIÓN ACERCA DEL DUEÑO BENEFICIARIO</label><input type="text"></div></div>
-
-        <div style="margin: 5px 0; font-size: 11px; font-weight: bold; text-transform: uppercase;">A continuación, indique con una "X" si se cuenta o no con dicho documento:</div>
-        <table class="doc-table">
-            <thead>
-                <tr>
-                    <th>DOCUMENTO</th>
-                    <th width="100" class="center">SI</th>
-                    <th width="100" class="center">NO</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>IV. CONSTANCIA DE CURP</td>
-                    <td class="center"><input type="text" style="width: 100%; text-align: center; border: none;"></td>
-                    <td class="center"><input type="text" style="width: 100%; text-align: center; border: none;"></td>
-                </tr>
-                <tr>
-                    <td>V. CONSTANCIA DE RFC</td>
-                    <td class="center"><input type="text" style="width: 100%; text-align: center; border: none;"></td>
-                    <td class="center"><input type="text" style="width: 100%; text-align: center; border: none;"></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div id="sec-apoderado">
-            <div class="section-title">
-                EN CASO DE QUE EL ACTO SEA REALIZADO POR CONDUCTO DE UNA PERSONA APODERADA
-                <select class="toggle-select" id="apo-toggle" onchange="actualizarVisibilidad()">
-                    <option value="NO">NO APLICA</option>
-                    <option value="SI">SI APLICA</option>
-                </select>
+            <div class="row">
+                <div class="field"><label>FECHA DE NACIMIENTO</label><input type="date"></div>
+                <div class="field"><label>PAÍS DE NACIMIENTO</label><input type="text"></div>
             </div>
-            <div id="apo-content" style="display: none;">
-                <div class="row"><div class="field"><label>VI. CARTA PODER O COPIA CERTIFICADA DEL MISMO POR FEDATARIO PÚBLICO (CUANDO SE ACTÚE A NOMBRE DE OTRA PERSONA)</label><input type="text"></div></div>
-                <div class="row"><div class="field"><label>VII. IDENTIFICACIÓN OFICIAL Y COMPROBANTE DE DOMICILIO DEL APODERADO</label><input type="text"></div></div>
+
+            <div class="row">
+                <div class="field">
+                    <label>ESTADO, PROVINCIA, CIUDAD MUNICIPIO (ESTADO)</label>
+                    <select id="edo-select" onchange="actualizarMunicipios()"><option value="">Seleccione...</option></select>
+                </div>
+                <div class="field">
+                    <label>MUNICIPIO / CIUDAD</label>
+                    <select id="mun-select"><option value="">-- Estado primero --</option></select>
+                </div>
+                <div class="field"><label>NACIONALIDAD</label><input type="text"></div>
+            </div>
+
+            <div class="row">
+                <div class="field"><label>ACTIVIDAD, OCUPACIÓN, PROFESIÓN, ACTIVIDAD O GIRO DE NEGOCIO A QUE SE DEDIQUE</label><input type="text"></div>
+            </div>
+
+            <div class="row">
+                <div class="field"><label>INGRESOS MENSUALES PROMEDIO</label><input type="text" placeholder="$"></div>
+                <div class="field"><label>RÉGIMEN FISCAL</label><input type="text"></div>
+            </div>
+
+            <div class="row">
+                <div class="field"><label>ESTADO CIVIL (EN CASO DE MATRIMONIO ESPECIFICAR RÉGIMEN CONYUGAL)</label><input type="text"></div>
+            </div>
+
+            <div class="row">
+                <div class="field"><label>¿DESEMPEÑA A CARGO PÚBLICO O LO HA DESEMPEÑADO EN EL ÚLTIMO AÑO? (ESPECIFICAR)</label><input type="text"></div>
+            </div>
+
+            <div class="row">
+                <div class="field"><label>¿ALGÚN PARIENTE HASTA EL SEGUNDO GRADO, CÓNYUGE, CONCUBINA (O) OCUPA O HA OCUPADO UN CARGO PÚBLICO EN EL ÚLTIMO AÑO? (ESPECIFICAR)</label><input type="text"></div>
+            </div>
+
+            <div class="section-title">DATOS DE CONTACTO DEL CLIENTE O USUARIO</div>
+
+            <div class="row">
+                <div class="field" style="flex: 2.5;"><label>DOMICILIO: CALLE, AVENIDA O VÍA</label><input type="text"></div>
+                <div class="field"><label>NÚMERO EXTERIOR</label><input type="text"></div>
+                <div class="field"><label>NÚMERO INTERIOR</label><input type="text"></div>
+            </div>
+
+            <div class="row">
+                <div class="field"><label>COLONIA O URBANIZACIÓN</label><input type="text"></div>
+                <div class="field"><label>MUNICIPIO O DEMARCACIÓN POLÍTICA SIMILAR</label><input type="text"></div>
+            </div>
+
+            <div class="row">
+                <div class="field"><label>CIUDAD O POBLACIÓN</label><input type="text"></div>
+                <div class="field"><label>ENTIDAD FEDERATIVA, ESTADO, PROVINCIA, DEPARTAMENTO O DEMARCACIÓN POLÍTICA SIMILAR</label><input type="text"></div>
+            </div>
+
+            <div class="row">
+                <div class="field"><label>CÓDIGO POSTAL</label><input type="text"></div>
+                <div class="field"><label>PAÍS</label><input type="text" value="MÉXICO"></div>
+            </div>
+
+            <div class="row">
+                <div class="field"><label>NÚMERO DE TELÉFONO FIJO</label><input type="text"></div>
+                <div class="field"><label>NÚMERO DE TELÉFONO CELULAR</label><input type="text"></div>
+                <div class="field" style="flex: 1.5;"><label>CORREO ELECTRÓNICO</label><input type="email"></div>
+            </div>
+
+            <div class="section-title">DATOS ADICIONALES DEL CLIENTE O USUARIO</div>
+
+            <div class="row">
+                <div class="field"><label>CURP</label><input type="text"></div>
+                <div class="field"><label>RFC</label><input type="text"></div>
+            </div>
+
+            <div class="row">
+                <div class="field" style="flex: 1.5;"><label>DATOS DE IDENTIFICACIÓN: NOMBRE DE LA IDENTIFICACIÓN</label><input type="text"></div>
+                <div class="field"><label>AUTORIDAD QUE LA EMITE</label><input type="text"></div>
+                <div class="field"><label>NÚMERO DE IDENTIFICACIÓN</label><input type="text"></div>
             </div>
         </div>
+        <div class="page-container" style="page-break-before: always; padding-top: 15px;">
+            <div class="marca-agua"></div>
 
-        <div class="row" style="margin-top: 10px;">
-            <div class="field"><label>LOS DOCUMENTOS QUE NOT SE TIENEN, MISMOS QUE SON SEÑALADOS CON UNA "X"</label><input type="text"></div>
-        </div>
+            <div class="legend-box" style="margin-top: 0;">
+                RESPECTO AL APARTADO DE BENEFICIARIO CONTROLADOR, Y EN CUMPLIMIENTO DE LO DISPUESTO EN EL ARTÍCULO 3, FRACCIÓN III DE LA LEY FEDERAL PARA LA PREVENCIÓN E IDENTIFICACIÓN DE OPERACIONES CON RECURSOS DE PROCEDENCIA ILÍCITA (LFPIORPI), DICHA INFORMACIÓN SERÁ INCORPORADA EN UN DOCUMENTO ANEXO, EL CUAL FORMARÁ PARTE INTEGRAL DEL EXPEDIENTE CORRESPONDIENTE.
+            </div>
 
-        <div class="row">
-            <div class="field"><label>MANIFIESTO:</label><input type="text"></div>
-        </div>
+            <div class="section-title">DOCUMENTOS QUE SE ESTÁN ENTREGANDO PARA EL EXPEDIENTE ÚNICO DE IDENTIFICACIÓN</div>
+            
+            <div class="row"><div class="field"><label>I. IDENTIFICACIÓN OFICIAL</label><input type="text"></div></div>
+            <div class="row"><div class="field"><label>II. COMPROBANTE DE DOMICILIO</label><input type="text"></div></div>
+            <div class="row"><div class="field"><label>III. CONSTANCIA POR LA QUE SE ACREDITE QUE SE SOLICITÓ INFORMACIÓN ACERCA DEL DUEÑO BENEFICIARIO</label><input type="text"></div></div>
 
-        <div class="signature-section">
-            <div class="sig-box">
-                <div class="sig-line" id="texto-firma">NOMBRE Y FIRMA DEL CLIENTE O USUARIO</div>
+            <div style="margin: 5px 0; font-size: 11px; font-weight: bold; text-transform: uppercase;">A continuación, indique con una "X" si se cuenta o no con dicho documento:</div>
+            <table class="doc-table">
+                <thead>
+                    <tr>
+                        <th>DOCUMENTO</th>
+                        <th width="100" class="center">SI</th>
+                        <th width="100" class="center">NO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>IV. CONSTANCIA DE CURP</td>
+                        <td class="center"><input type="text" style="width: 100%; text-align: center; border: none;"></td>
+                        <td class="center"><input type="text" style="width: 100%; text-align: center; border: none;"></td>
+                    </tr>
+                    <tr>
+                        <td>V. CONSTANCIA DE RFC</td>
+                        <td class="center"><input type="text" style="width: 100%; text-align: center; border: none;"></td>
+                        <td class="center"><input type="text" style="width: 100%; text-align: center; border: none;"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id="sec-apoderado">
+                <div class="section-title">
+                    EN CASO DE QUE EL ACTO SEA REALIZADO POR CONDUCTO DE UNA PERSONA APODERADA
+                    <select class="toggle-select" id="apo-toggle" onchange="actualizarVisibilidad()">
+                        <option value="NO">NO APLICA</option>
+                        <option value="SI">SI APLICA</option>
+                    </select>
+                </div>
+                <div id="apo-content" style="display: none;">
+                    <div class="row"><div class="field"><label>VI. CARTA PODER O COPIA CERTIFICADA DEL MISMO POR FEDATARIO PÚBLICO (CUANDO SE ACTÚE A NOMBRE DE OTRA PERSONA)</label><input type="text"></div></div>
+                    <div class="row"><div class="field"><label>VII. IDENTIFICACIÓN OFICIAL Y COMPROBANTE DE DOMICILIO DEL APODERADO</label><input type="text"></div></div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 10px;">
+                <div class="field"><label>LOS DOCUMENTOS QUE NO SE TIENEN, MISMOS QUE SON SEÑALADOS CON UNA "X"</label><input type="text"></div>
+            </div>
+
+            <div class="row">
+                <div class="field"><label>MANIFIESTO:</label><input type="text"></div>
+            </div>
+
+            <div class="signature-section">
+                <div class="sig-box">
+                    <div class="sig-line" id="texto-firma">NOMBRE Y FIRMA DEL CLIENTE O USUARIO</div>
+                </div>
             </div>
         </div>
-    </div>
+        </div>
 
     <script>
         // SEGURIDAD
@@ -321,7 +361,7 @@
             "CDMX": ["Álvaro Obregón","Azcapotzalco","Benito Juárez","Coyoacán","Cuajimalpa de Morelos","Cuauhtémoc","Gustavo A. Madero","Iztacalco","Iztapalapa","La Magdalena Contreras","Miguel Hidalgo","Milpa Alta","Tláhuac","Tlalpan","Venustiano Carranza","Xochimilco"],
             "Estado de México": ["Acambay","Acolman","Aculco","Almoloya de Alquisiras","Almoloya de Juárez","Almoloya del Río","Amanalco","Amatepec","Amecameca","Apaxco","Atenco","Atizapán","Atizapán de Zaragoza","Atlacomulco","Atlautla","Axapusco","Ayapango","Calimaya","Capulhuac","Coacalco de Berriozábal","Coatepec Harinas","Cocotitlán","Coyotepec","Cuautitlán","Chalco","Chapa de Mota","Chapultepec","Chiautla","Chicoloapan","Chiconcuac","Chimalhuacán","Donato Guerra","Ecatepec de Morelos","Ecatzingo","Huehuetoca","Hueypoxtla","Huixquilucan","Isidro Fabela","Ixtapaluca","Ixtapan de la Sal","Ixtapan del Oro","Ixtlahuaca","Xalatlaco","Jaltenco","Jilotepec","Jilotzingo","Jiquipilco","Jocotitlán","Joquicingo","Juárez","Lerma","Malinalco","Melchor Ocampo","Metepec","Mexicaltzingo","Morelos","Naucalpan de Juárez","Nezahualcóyotl","Nextlalpan","Nicolás Romero","Nopaltepec","Ocoyoacac","Ocuilan","El Oro","Otumba","Otzoloapan","Otzolotepec","Ozumba","Papalotla","La Paz","Polotitlán","Rayón","San Antonio la Isla","San Felipe del Progreso","San Martín de las Pirámides","San Mateo Atenco","San Simón de Guerrero","Santo Tomás","Soyaniquilpan de Juárez","Sultepec","Tecámac","Tejupilco","Temamatla","Temascalapa","Temascalcingo","Temascaltepec","Temoaya","Tenancingo","Tenango del Aire","Tenango del Valle","Teoloyucan","Teotihuacán","Tepetlaoxtoc","Tepetlixpa","Tepotzotlán","Tequixquiac","Texcaltitlán","Texcalyacac","Texcoco","Tezoyuca","Tianguistenco","Timilpan","Tlalmanalco","Tlalnepantla de Baz","Tlatlaya","Toluca","Tonatico","Tultepec","Tultitlán","Valle de Bravo","Villa de Allende","Villa del Carbón","Villa Guerrero","Villa Victoria","Xonacatlán","Zacazonapan","Zacualpan","Zinacantepec","Zumpahuacán","Zumpango","Cuautitlán Izcalli","Valle de Chalco","Luvianos","San José del Rincón","Tonanitla"],
             "Guanajuato": ["Abasolo","Acámbaro","San Miguel de Allende","Apaseo el Alto","Apaseo el Grande","Atarjea","Celaya","Manuel Doblado","Comonfort","Coroneo","Cortazar","Cuerámaro","Doctor Mora","Dolores Hidalgo","Guanajuato","Huanímaro","Irapuato","Jaral del Progreso","Jerécuaro","León","Moroleón","Ocampo","Pénjamo","Pueblo Nuevo","Purísima del Rincón","Romita","Salamanca","Salvatierra","San Diego de la Unión","San Felipe","San Francisco del Rincón","San José Iturbide","San Luis de la Paz","Santa Catarina","Santa Cruz de Juventino Rosas","Santiago Maravatío","Silao de la Victoria","Tarandacuao","Tarimoro","Tierra Blanca","Uriangato","Valle de Santiago","Victoria","Villagrán","Xichú","Yuriria"],
-            "Jalisco": ["Acatic","Acatlán de Juárez","Ahualulco de Mercado","Amacueca","Amatitán","Ameca","San Juanito de Escobedo","Arandas","El Arenal","Atemajac de Brizuela","Atengo","Atenguillo","Atotonilco el Alto","Atoyac","Autlán de Navarro","Ayotlán","Ayutla","La Barca","Bolaños","Cabo Corrientes","Casimiro Castillo","Cihuatlán","Zapotlán el Grande","Cocula","Colotlán","Concepción de Buenos Aires","Cuautitlán de García Barragán","Cuautla","Cuquío","Chapala","Chimaltitán","Chiquilistlán","Degollado","Ejutla","Encarnación de Díaz","Etzatlán","El Grullo","Guachinango","Guadalajara","Hostotipaquillo","Huejúcar","Huejuquilla el Alto","La Huerta","Ixtlahuacán de los Membrillos","Ixtlahuacán del Río","Jalostotitlán","Jamay","Jesús María","Jilotlán de los Dolores","Jocotepec","Juanacatlán","Juchitlán","Lagos de Moreno","El Limón","Magdalena","Santa María del Oro","La Manzanilla de la Paz","Mascota","Mazamitla","Mexticacán","Mezquitic","Mixtlán","Ocotlán","Ojuelos de Jalisco","Pihuamo","Poncitlán","Puerto Vallarta","Villa Purificación","Quitupan","El Salto","San Cristóbal de la Barranca","San Diego de Alejandría","San Juan de los Lagos","San Julián","San Marcos","San Martín de Bolaños","San Martín Hidalgo","San Miguel el Alto","Gómez Farías","San Sebastián del Oeste","Santa María de los Ángeles","Sayula","Tala","Talpa de Allende","Tamazula de Gordiano","Tapalpa","Tecalitlán","Tecolotlán","Techaluta de Montenegro","Tenamaxtlán","Teocaltiche","Teocuitatlán de Corona","Tepatitlán de Morelos","Tequila","Teuchitlán","Tizapán el Alto","Tlajomulco de Zúñiga","Tlaquepaque","Tolimán","Tomatlán","Tonalá","Tonaya","Tonila","Totatiche","Tototlán","Tuxcacuesco","Tuxcueca","Tuxpan","Unión de San Antonio","Unión de Tula","Valle de Guadalupe","Valle de Juárez","San Gabriel","Villa Corona","Villa Guerrero","Villa Hidalgo","Yahualica de González Gallo","Zacoalco de Torres","Zapopan","Zapotiltic","Zapotitlán de Vadillo","Zapotlán del Rey","Zapotlanejo","San Ignacio Cerro Gordo"],
+            "Jalisco": ["Acatic","Acatlán de Juárez","Ahualulco de Mercado","Amacueca","Amatitán","Ameca","San Juanito de Escobedo","Arandas","El Arenal","Atemajac de Brizuela","Atengo","Atenguillo","Atotonilco el Alto","Atoyac","Autlán de Navarro","Ayotlán","Ayutla","La Barca","Bolaños","Cabo Corrientes","Casimiro Castillo","Cihuatlán","Zapotlán el Grande","Cocula","Colotlán","Concepción de Buenos Aires","Cuautitlán de García Barragán","Cuautla","Cuquío","Chapala","Chimaltitán","Chiquilistlán","Degollado","Ejutla","Encarnación de Díaz","Etzatlán","El Grullo","Guachinango","Guadalajara","Hostotipaquillo","Huejúcar","Huejuquilla el Alto","La Huerta","Ixtlahuacán de los Membrillos","Ixtlahuacán del Río","Jalostotitlán","Jamay","Jesús María","Jilotlán de los Dolores","Jocotepec","Juanacatlán","Juchitlán","Lagos de Moreno","El Limón","Magdalena","Santa María del Oro","La Manzanilla de la Paz","Mascota","Mazamitla","Mexticacán","Mezquitic","Mixtlán","Ocotlán","Ojuelos de Jalisco","Pihuamo","Poncitlán","Puerto Vallarta","Villa Purificación","Quitupan","El Salto","San Cristóbal de la Barranca","San Diego de Alejandría","San Juan de los Lagos","San Julián","San Marcos","San Martín de Bolaños","San Martín Hidalgo","San Miguel el Alto","Gómez Farías","San Sebastián del Oeste","Santa María de los Ángeles","Sayula","Tala","Talpa de Allende","Tamazula de Gordiano","Tapalpa","Tecalitlán","Tecolotlán","Techaluta de Montenegro","Tenamaxtlán","Teocaltiche","Teocuitatlán de Corona","Tepatitlán de Morelos","Tequila","Teuchitlán","Tizapán el Alto","Tlajomulco de Zúñiga","Tlaquepaque","Tolimán","Tomatlán","Tonalá","Tonaya","Tonila","Totatiche","Tototlán","Tuxcacuesco","Tuxcueca","Tuxpan","Unión de San Antonio","Unión de Tula","Valle de Guadalupe","Valle de Juárez","San Gabriel","Villa Corona","Villa Guerrero","Villa Hidalgo","Yahualica","Zacoalco de Torres","Zapopan","Zapotiltic","Zapotitlán de Vadillo","Zapotlán del Rey","Zapotlanejo","San Ignacio Cerro Gordo"],
             "Aguascalientes": ["Aguascalientes", "Jesús María", "Calvillo"],
             "Baja California": ["Mexicali", "Tijuana", "Ensenada"],
             "Baja California Sur": ["La Paz", "Los Cabos"],
